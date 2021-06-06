@@ -9,7 +9,11 @@
 
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="./styles/style.css">
-  <script> var rKey;
+
+  <script src="//cdn.split.io/sdk/split-10.15.7.min.js"></script>
+
+  <script> 
+  var rKey;
     function randomKey(length) {
       var result = [];
       var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -41,7 +45,7 @@
           var body = document.querySelector('body');
           body.style.backgroundColor = "violet";
           console.log("bold color");
-      }   else   if (treatment === 'off') {
+      }   else if (treatment === 'off') {
           // insert off code here
           var body = document.querySelector('body');
           body.style.backgroundColor = "gray";
@@ -71,7 +75,6 @@
 
   <!-- journal-entry web component -->
   
- <script src="//cdn.split.io/sdk/split-10.15.7.min.js"></script>
 
   <script src="./components/journal-entry.js" type="module"></script>
   <script src="./components/entry-page.js" type="module"></script>
