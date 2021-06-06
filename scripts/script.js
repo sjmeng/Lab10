@@ -2,6 +2,7 @@
 
 import { router } from './router.js';
 
+var rKey;
 function randomKey(length) {
   var result = [];
   var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -9,30 +10,30 @@ function randomKey(length) {
   for ( var i = 0; i < length; i++ ) {
     result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
   }
-  var rKey = result.join('');
+  rKey = result.join('');
 }
 
-window.onload()= randomKey();
+window.onload= randomKey(5);
 
 
-var SplitFactory = require('@splitsoftware/splitio').SplitFactory;
-// Instantiate the SDK
-var factory = SplitFactory({ 
+
+// Instantiate the SDK. CDN will expose splitio globally 
+var factory = splitio({ 
   core: {
     authorizationKey: 'k5na1f28j0dnibh2e0gl5nrjl1lpulnqtcp1',
-    // the key can be the logged in
-    // user id, or the account id that 
-    // the logged in user belongs to. 
-    // The type of customer (user, account, custom)
-    // is chosen during Split's sign-up process.
-    key: rKey
-  },
-  startup: {
-    readyTimeout: 1.5 // 1.5 sec
+    // your internal user id, or the account id that 
+    // the user belongs to. 
+    // This coudld also be a cookie you generate
+    // for anonymous users
+    key: rKey,
+    // an OPTIONAL traffic type, if provided will be
+    // used for event tracking with the SDK client.
+    //trafficType: 'A_TRAFFIC_TYPE'
   }
 });
 // And get the client instance you'll use
 var client = factory.client();
+
 
 client.on(client.Event.SDK_READY, function() {
   var treatment = client.getTreatment("double-column2");
@@ -40,15 +41,19 @@ client.on(client.Event.SDK_READY, function() {
       // insert code here to show on treatment
       var main = document.querySelector('main');
       main.className = 'double-column';
+      console.log("double");
   } else if (treatment == "off") {
       // insert code here to show off treatment
       var main = document.querySelector('main');
-      main.className = 'single-column';
+      main.classList.remove('double-column');
+      console.log("single");
   } else {
       // insert your control treatment code here
       console.log("yo");
   }
 });
+
+
 
 
 
