@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 8 - E2E Testing</title>
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="./styles/style.css">
+  <script> var rKey;
+    function randomKey(length) {
+      var result = [];
+      var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var charactersLength = characters.length;
+      for ( var i = 0; i < length; i++ ) {
+        result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
+      }
+      rKey = result.join('');
+    }
+    
+    window.onload= randomKey(5);
+    
+    
+    
+    var factory = splitio({
+      core: {
+        authorizationKey: 'uq910hm04ftia9drc2t0iib0mgfg25urqe50',
+        key: rKey // unique identifier for your user
+      }
+    });
+    
+    var client = factory.client();
+    
+    client.on(client.Event.SDK_READY, function() {
+      var treatment = client.getTreatment('double-column2');
+    
+      if (treatment === 'on') {
+          // insert on code here
+          var main = document.querySelector('main');
+          main.style.color = "pink";
+          console.log("bold color");
+      }   else   if (treatment === 'off') {
+          // insert off code here
+          var main = document.querySelector('main');
+          main.style.color = "gray";
+          console.log("muted color");
+      }   else {
+          // insert control code here
+          console.log("yo");
+          console.log(treatment);
+      }
+    
+    });
+    </script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="./styles/favicon.ico">
+</head>
+
+<body>
+  <header>
+    <h1>Journal Entries</h1>
+    <img src="./styles/settings.svg" alt="settings" width=40 height=40>
+  </header>
+
+  <main class="double-column"></main>
+
+  <entry-page></entry-page>
+
+  <!-- journal-entry web component -->
+  
+ <script src="//cdn.split.io/sdk/split-10.15.7.min.js"></script>
+
+  <script src="./components/journal-entry.js" type="module"></script>
+  <script src="./components/entry-page.js" type="module"></script>
+
+  <!-- Router Script -->
+  <script src="./scripts/router.js" type="module"></script>
+
+  <!-- Main Script -->
+  <script src="./scripts/script.js" type="module"></script>
+</body>
+
+</html>

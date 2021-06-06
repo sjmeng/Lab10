@@ -2,60 +2,6 @@
 
 import { router } from './router.js';
 
-var rKey;
-function randomKey(length) {
-  var result = [];
-  var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
-    result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
-  }
-  rKey = result.join('');
-}
-
-window.onload= randomKey(5);
-
-
-
-// Instantiate the SDK. CDN will expose splitio globally 
-var factory = splitio({ 
-  core: {
-    authorizationKey: 'k5na1f28j0dnibh2e0gl5nrjl1lpulnqtcp1',
-    // your internal user id, or the account id that 
-    // the user belongs to. 
-    // This coudld also be a cookie you generate
-    // for anonymous users
-    key: rKey,
-    // an OPTIONAL traffic type, if provided will be
-    // used for event tracking with the SDK client.
-    //trafficType: 'A_TRAFFIC_TYPE'
-  }
-});
-// And get the client instance you'll use
-var client = factory.client();
-
-
-client.on(client.Event.SDK_READY, function() {
-  var treatment = client.getTreatment("double-column2");
-  if (treatment == "on") {
-      // insert code here to show on treatment
-      var main = document.querySelector('main');
-      main.className = 'double-column';
-      console.log("double");
-  } else if (treatment == "off") {
-      // insert code here to show off treatment
-      var main = document.querySelector('main');
-      main.classList.remove('double-column');
-      console.log("single");
-  } else {
-      // insert your control treatment code here
-      console.log("yo");
-  }
-});
-
-
-
-
 
 const headerText = document.querySelector('header > h1');
 const settings = document.querySelector('header > img');

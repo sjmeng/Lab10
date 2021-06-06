@@ -7,6 +7,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lab 8 - E2E Testing</title>
 
+<script>var rKey;
+  function randomKey(length) {
+    var result = [];
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
+    }
+    rKey = result.join('');
+  }
+  
+  window.onload= randomKey(5);
+  
+  
+  
+  var factory = splitio({
+    core: {
+      authorizationKey: 'uq910hm04ftia9drc2t0iib0mgfg25urqe50',
+      key: rKey // unique identifier for your user
+    }
+  });
+  
+  var client = factory.client();
+  
+  client.on(client.Event.SDK_READY, function() {
+    var treatment = client.getTreatment('double-column2');
+  
+    if (treatment === 'on') {
+        // insert on code here
+        var main = document.querySelector('main');
+        main.className = 'double-column';
+        console.log("double");
+    }   else   if (treatment === 'off') {
+        // insert off code here
+        var main = document.querySelector('main');
+        main.classList.remove('double-column');
+        console.log("single");
+    }   else {
+        // insert control code here
+        console.log("yo");
+        console.log(treatment);
+    }
+  
+  });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="./styles/style.css">
 
