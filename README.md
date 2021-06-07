@@ -11,3 +11,4 @@ https://sjmeng.github.io/Lab10/secondSplit.html
 
 
 ### Part 3
+I genuinely tried so hard to get it working at this point I have a shred of sanity left 
